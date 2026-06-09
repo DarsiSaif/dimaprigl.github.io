@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Сюрприз для Димочки ❤️</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            font-family: 'Segoe UI', 'Quicksand', system-ui, -apple-system, 'Helvetica Neue', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .slides-container {
+            max-width: 650px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.96);
+            border-radius: 60px;
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            backdrop-filter: blur(2px);
+            transition: all 0.4s ease;
+            padding: 30px 25px 45px;
+            text-align: center;
+        }
+
+        .slide {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .heart-big {
+            font-size: 70px;
+            animation: pulse 1.2s infinite;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); text-shadow: 0 0 0 #ff6b81; }
+            70% { transform: scale(1.1); text-shadow: 0 0 20px #ff3366; }
+            100% { transform: scale(0.95); text-shadow: 0 0 0 #ff6b81; }
+        }
+
+        h1 {
+            font-size: 2.3rem;
+            color: #b83b5e;
+            margin: 10px 0 15px;
+            font-weight: 800;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            color: #b83b5e;
+            margin: 10px 0;
+        }
+
+        .sub {
+            font-size: 1.2rem;
+            background: #ffe9f0;
+            display: inline-block;
+            padding: 8px 24px;
+            border-radius: 60px;
+            color: #a14d6e;
+            font-weight: 500;
+            margin-bottom: 25px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            margin: 30px 0 20px;
+        }
+
+        .btn {
+            border: none;
+            font-size: 1.4rem;
+            font-weight: bold;
+            padding: 14px 32px;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: 0.2s;
+            background: white;
+            box-shadow: 0 5px 12px rgba(0,0,0,0.1);
+        }
+
+        .btn-yes {
+            background: #ff6b81;
+            color: white;
+            box-shadow: 0 8px 18px #ff6b8140;
+        }
+
+        .btn-yes:hover {
+            background: #e84a66;
+            transform: scale(1.02);
+        }
+
+        .btn-no {
+            background: #ddd;
+            color: #555;
+            position: relative;
+            transition: all 0.2s;
+        }
+
+        .form-group {
+            text-align: left;
+            background: #fff8fa;
+            border-radius: 48px;
+            padding: 20px 25px;
+            margin: 20px 0;
+        }
+
+        .form-group label {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #8b3c5e;
+            margin-bottom: 12px;
+        }
+
+        select, input[type="date"], input[type="time"] {
+            width: 100%;
+            padding: 14px 18px;
+            font-size: 1rem;
+            border: 2px solid #ffc0d0;
+            border-radius: 60px;
+            background: white;
+            font-family: inherit;
+            margin-bottom: 8px;
+        }
+
+        .place-option {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 5px;
+        }
+
+        .place-option label {
+            background: #fff0f5;
+            padding: 12px 18px;
+            border-radius: 60px;
+            font-weight: normal;
+            font-size: 1rem;
+            cursor: pointer;
+            border: 1px solid #ffccd9;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        input[type="radio"] {
+            width: auto;
+            transform: scale(1.2);
+            margin-left: 5px;
+        }
+
+        .place-option label:has(input:checked) {
+            background: #ff6b81;
+            color: white;
+            border-color: #ff6b81;
+        }
+
+        .btn-submit {
+            background: #ff6b81;
+            color: white;
+            border: none;
+            font-size: 1.4rem;
+            font-weight: bold;
+            padding: 14px 20px;
+            border-radius: 80px;
+            width: 100%;
+            cursor: pointer;
+            margin: 15px 0;
+            transition: 0.2s;
+        }
+
+        .final-photo {
+            max-width: 100%;
+            border-radius: 50px;
+            margin: 20px 0;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border: 4px solid white;
+        }
+
+        .final-message {
+            font-size: 1.3rem;
+            color: #8b3c5e;
+            margin: 20px 0;
+            line-height: 1.4;
+        }
+
+        .photo-instruction {
+            background: #fff0f5;
+            padding: 15px;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            text-align: left;
+            margin-top: 20px;
+            color: #a14d6e;
+        }
+
+        footer {
+            margin-top: 20px;
+            font-size: 0.8rem;
+            color: #c47e98;
+        }
+    </style>
+</head>
+<body>
+
+<div class="slides-container">
+    <!-- СЛАЙД 1: Вопрос с убегающей кнопкой "Нет" -->
+    <div id="slide1" class="slide active">
+        <div class="heart-big">💖💕💗</div>
+        <h1>Дорогой мой муж, любимый Димочка! 💑</h1>
+        <div class="sub">Приглашаю тебя провести время вдвоём...</div>
+        <div class="buttons">
+            <button class="btn btn-yes" id="yesBtn1">✨ ДА, с радостью! ✨</button>
+            <button class="btn btn-no" id="noBtn">😅 Нет, спасибо</button>
+        </div>
+        <footer>Нажми на красную кнопку — и будет магия ✨</footer>
+    </div>
+
+    <!-- СЛАЙД 2: Выбор даты и времени -->
+    <div id="slide2" class="slide">
+        <div class="heart-big">📅⏰</div>
+        <h2>Выбери, когда нам встретиться</h2>
+        <div class="form-group">
+            <label><span>📅</span> Удобная дата</label>
+            <input type="date" id="datePicker" value="2026-06-20">
+        </div>
+        <div class="form-group">
+            <label><span>⏰</span> Удобное время</label>
+            <input type="time" id="timePicker" value="19:00">
+        </div>
+        <button class="btn-submit" id="toPlaceBtn">💗 Продолжить → 💗</button>
+    </div>
+
+    <!-- СЛАЙД 3: Выбор места (стикеры исправлены и дополнены) -->
+    <div id="slide3" class="slide">
+        <div class="heart-big">📍</div>
+        <h2>А где проведём этот вечер?</h2>
+        <div class="form-group">
+            <div class="place-option">
+                <label>
+                    <input type="radio" name="place" value="Наша любимая набережная (Площадь у фонтана)" checked>
+                    ⛲ Набережная, площадь у фонтана
+                </label>
+                <label>
+                    <input type="radio" name="place" value="Выезд в новое место/город/на природу">
+                    🚗🌄 Выезд в новое место / город / на природу
+                </label>
+                <label>
+                    <input type="radio" name="place" value="Приготовление домашнего ужина и сам ужин при свечах, настолки">
+                    🏠🍳🕯️ Домашний ужин при свечах + настолки
+                </label>
+                <label>
+                    <input type="radio" name="place" value="Кино/театр (можно посмотреть что-то дома) + ночная прогулка">
+                    🎬🌙 Кино / театр (или дома) + ночная прогулка
+                </label>
+                <label>
+                    <input type="radio" name="place" value="Пикник на природе (я всё организую)">
+                    🧺🌳 Пикник на природе (я всё организую)
+                </label>
+            </div>
+        </div>
+        <button class="btn-submit" id="toFinalBtn">💖 Завершить выбор 💖</button>
+    </div>
+
+    <!-- СЛАЙД 4: Финальная страница с фото -->
+    <div id="slide4" class="slide">
+        <div class="heart-big">💞💞💞</div>
+        <h2>Димочка, спасибо, что согласился!</h2>
+        <div class="final-message">
+            Ты выбрал:<br>
+            <strong id="finalDateTime"></strong><br>
+            <strong id="finalPlace"></strong><br>
+            ❤️ Я тебя очень жду! ❤️
+        </div>
+        <img id="ourPhoto" class="final-photo" src="our_love.jpg" alt="Наше фото" style="max-width: 100%;">
+        <div class="photo-instruction">
+            📸 <strong>Как вставить ваше общее фото?</strong><br>
+            1. Возьми любую вашу совместную фотографию (формат .jpg, .png или .jpeg).<br>
+            2. Переименуй файл в <strong>our_love.jpg</strong> (или .png).<br>
+            3. Положи этот файл в <strong>ТУ ЖЕ ПАПКУ</strong>, где лежит этот HTML-файл.<br>
+            4. Готово! Фото появится здесь. Если хочешь другое имя — замени в коде <code>src="our_love.jpg"</code> на имя твоего файла.
+        </div>
+        <footer>Вечер будет незабываемым, обещаю 💋</footer>
+    </div>
+</div>
+
+<script>
+    // --- ИНТЕРАКТИВ ДЛЯ КНОПКИ "НЕТ" ---
+    const noBtn = document.getElementById('noBtn');
+    let noClickCount = 0;
+    const excuses = [
+        "❓ Подумай ещё раз...",
+        "🥺 Обещаю, будет чудесно!",
+        "💘 А если я очень попрошу?",
+        "🌈 Я уже всё приготовила!",
+        "💎 Ты точно хочешь отказать?",
+        "🍷 Ладно... но такие воспоминания пропадут!",
+        "😈 Нажми на розовую кнопку, милый!"
+    ];
+
+    noBtn.addEventListener('click', () => {
+        if (noClickCount < excuses.length) {
+            noBtn.textContent = excuses[noClickCount];
+            noClickCount++;
+            if (noClickCount >= 3) {
+                noBtn.style.transform = "scale(0.85)";
+                noBtn.style.opacity = "0.7";
+            }
+            if (noClickCount >= 5) {
+                noBtn.style.transform = "scale(0.7)";
+                noBtn.style.opacity = "0.5";
+            }
+        } else {
+            noBtn.style.display = "none";
+            alert('💕 Дорогой, выбора больше нет! Жми на ДА 💕');
+        }
+    });
+
+    // --- Управление слайдами ---
+    const slides = document.querySelectorAll('.slide');
+    function showSlide(index) {
+        slides.forEach((slide, i) => {
+            if (i === index) slide.classList.add('active');
+            else slide.classList.remove('active');
+        });
+    }
+
+    document.getElementById('yesBtn1').addEventListener('click', () => {
+        showSlide(1);
+        createConfetti();
+    });
+
+    document.getElementById('toPlaceBtn').addEventListener('click', () => {
+        const date = document.getElementById('datePicker').value;
+        const time = document.getElementById('timePicker').value;
+        if (!date || !time) {
+            alert("Пожалуйста, выбери дату и время ❤️");
+            return;
+        }
+        showSlide(2);
+    });
+
+    document.getElementById('toFinalBtn').addEventListener('click', () => {
+        const date = document.getElementById('datePicker').value;
+        const time = document.getElementById('timePicker').value;
+        const selectedPlace = document.querySelector('input[name="place"]:checked');
+        if (!selectedPlace) {
+            alert("Выбери место встречи, пожалуйста!");
+            return;
+        }
+        const placeText = selectedPlace.value;
+        
+        const dateObj = new Date(date);
+        const formattedDate = dateObj.toLocaleDateString('ru-RU', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+        
+        document.getElementById('finalDateTime').innerHTML = `📅 ${formattedDate} в ${time}`;
+        document.getElementById('finalPlace').innerHTML = `📍 ${placeText}`;
+        
+        showSlide(3);
+        createConfetti(true);
+    });
+
+    function createConfetti(heavy = false) {
+        const count = heavy ? 120 : 60;
+        for (let i = 0; i < count; i++) {
+            let heart = document.createElement('div');
+            heart.innerHTML = ['❤️','💖','💗','💓','💘','💝','💕','💞'][Math.floor(Math.random()*8)];
+            heart.style.position = 'fixed';
+            heart.style.left = Math.random() * window.innerWidth + 'px';
+            heart.style.top = '-40px';
+            heart.style.fontSize = (18 + Math.random() * 35) + 'px';
+            heart.style.pointerEvents = 'none';
+            heart.style.zIndex = '9999';
+            heart.style.transition = 'all 2.5s ease-out';
+            document.body.appendChild(heart);
+            setTimeout(() => {
+                heart.style.top = window.innerHeight + 50 + 'px';
+                heart.style.opacity = '0';
+                setTimeout(() => heart.remove(), 2500);
+            }, 20);
+        }
+    }
+</script>
+</body>
+</html>
